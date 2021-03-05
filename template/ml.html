@@ -1,0 +1,711 @@
+html lang="en-US">
+
+<head>
+  <meta charset="utf-8">
+  <meta name="google-site-verification" content="Zkrpcge71CkhGPEkXP2eq2Bqe4Glh5q_uvpt2Ond624" />
+  <!-- Global site tag (gtag.js) - Google Analytics -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=UA-138942304-1"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+
+    function gtag() {
+      dataLayer.push(arguments);
+    }
+    gtag("js", new Date());
+    gtag("config", "UA-138942304-1");
+  </script>
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1"> <!-- Begin Jekyll SEO tag v2.6.1 -->
+  <title>Flask Online Machine Learning </title>
+  <meta name="generator" content="Jekyll v3.9.0" />
+  <meta property="og:title" content="Flask Online Machine Learning" />
+  <meta name="author" content="pierpaolo28" />
+  <meta property="og:locale" content="en_US" />
+  <meta name="description" content="Random Forest Classification prediction for blood donation deployed using Flask." />
+  <meta property="og:description" content="Random Forest Classification prediction for blood donation deployed using Flask." />
+  <link rel="canonical" href="https://sleepy-ridge-93654.herokuapp.com/" />
+  <meta property="og:url" content="https://sleepy-ridge-93654.herokuapp.com/" />
+  <meta property="og:site_name" content="Pier Paolo Ippolito" />
+  <meta property="og:type" content="article" />
+  <meta property="article:published_time" content="2019-07-05T00:00:00+00:00" />
+  <script type="application/ld+json">
+    {
+      "dateModified": "2019-12-27T00:00:00+00:00",
+      "datePublished": "2019-12-27T00:00:00+00:00",
+      "headline": "Flask Online Machine Learning",
+      "mainEntityOfPage": {
+        "@type": "WebPage",
+        "@id": "https://sleepy-ridge-93654.herokuapp.com/"
+      },
+      "author": {
+        "@type": "Person",
+        "name": "pierpaolo28"
+      },
+      "description": "Random Forest Classification prediction for blood donation deployed using Flask.",
+      "url": "https://sleepy-ridge-93654.herokuapp.com/",
+      "@type": "BlogPosting",
+      "@context": "https://schema.org"
+    }
+  </script> <!-- End Jekyll SEO tag -->
+  <link rel="apple-touch-icon" sizes="180x180" href="/static/apple-touch-icon.png?v=qA3OXqyw77">
+  <link rel="icon" type="image/png" sizes="32x32" href="/static/favicon-32x32.png?v=qA3OXqyw77">
+  <link rel="icon" type="image/png" sizes="16x16" href="/static/favicon-16x16.png?v=qA3OXqyw77">
+  <link rel="manifest" href="/static/manifest.json?v=qA3OXqyw77">
+  <link rel="mask-icon" href="/static/safari-pinned-tab.svg?v=qA3OXqyw77" color="#5bbad5">
+  <!--[if IE]><link rel="shortcut icon" href="/assets/img/icons/favicon.ico?v=qA3OXqyw77"><![endif]-->
+  <link rel="shortcut icon" href="/static/favicon.ico?v=qA3OXqyw77">
+  <meta name="apple-mobile-web-app-title" content="Sleek">
+  <meta name="application-name" content="Sleek">
+  <meta name="msapplication-config" content="/static/browserconfig.xml?v=qA3OXqyw77">
+  <meta name="theme-color" content="#ffffff">
+  <style class="inlineCSS">
+    h1 {
+      color: #313237;
+      margin-top: 0;
+      margin-bottom: .5rem
+    }
+
+    .dark-bg {
+      background-color: #313237
+    }
+
+    @media only screen and (min-width:48em) {
+      .post-card {
+        width: 48.4375%;
+        margin-right: 3.125%
+      }
+
+      .post-card:last-of-type,
+      .post-card:nth-child(2n+2) {
+        margin-right: 0
+      }
+    }
+
+    html {
+      line-height: 1.15;
+      -ms-text-size-adjust: 100%;
+      -webkit-text-size-adjust: 100%
+    }
+
+    body {
+      margin: 0
+    }
+
+    header,
+    nav,
+    section {
+      display: block
+    }
+
+    h1 {
+      font-size: 2em;
+      margin: .67em 0
+    }
+
+    figure,
+    main {
+      display: block
+    }
+
+    figure {
+      margin: 1em 40px
+    }
+
+    a {
+      background-color: transparent;
+      -webkit-text-decoration-skip: objects
+    }
+
+    img {
+      border-style: none
+    }
+
+    svg:not(:root) {
+      overflow: hidden
+    }
+
+    ::-webkit-file-upload-button {
+      -webkit-appearance: button;
+      font: inherit
+    }
+
+    html {
+      -webkit-box-sizing: border-box;
+      box-sizing: border-box
+    }
+
+    body {
+      -webkit-overflow-scrolling: touch
+    }
+
+    *,
+    ::after,
+    ::before {
+      -webkit-box-sizing: inherit;
+      box-sizing: inherit
+    }
+
+    .site {
+      display: -webkit-box;
+      display: -ms-flexbox;
+      display: flex;
+      min-height: 100vh;
+      -webkit-box-orient: vertical;
+      -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+      flex-direction: column
+    }
+
+    .site__content {
+      -webkit-box-flex: 1;
+      -ms-flex: 1;
+      flex: 1
+    }
+
+    img {
+      max-width: 100%;
+      height: auto;
+      width: auto;
+      vertical-align: middle
+    }
+
+    figure {
+      margin: 0
+    }
+
+    body {
+      background-color: #fff;
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, "Hiragino Sans GB", "Microsoft YaHei", "WenQuanYi Micro Hei", sans-serif;
+      font-size: 1rem;
+      line-height: 1.5;
+      color: #343851;
+      -webkit-font-smoothing: antialiased;
+      -webkit-text-size-adjust: 100%
+    }
+
+    p {
+      margin-top: 0;
+      margin-bottom: 1.25rem
+    }
+
+    h1,
+    h2 {
+      color: #313237;
+      margin-top: 0;
+      margin-bottom: .5rem
+    }
+
+    a {
+      color: #277cea;
+      text-decoration: none;
+      border-bottom: 1px dashed #277cea
+    }
+
+    .blur {
+      background: #fff;
+      filter: url('data:image/svg+xml;charset=utf-8,<svg xmlns="http://www.w3.org/2000/svg"><filter id="filter"><feGaussianBlur stdDeviation="16" /></filter></svg>#filter');
+      -webkit-filter: blur(1rem);
+      filter: blur(1rem)
+    }
+
+    .container {
+      padding: 0 20px;
+      max-width: 100%;
+      margin: 0 auto
+    }
+
+    @media only screen and (min-width:36em) {
+      .container {
+        max-width: 540px;
+        margin: 0 auto
+      }
+    }
+
+    @media only screen and (min-width:48em) {
+      .container {
+        max-width: 720px;
+        margin: 0 auto
+      }
+    }
+
+    @media only screen and (min-width:62em) {
+      .container {
+        max-width: 960px;
+        margin: 0 auto
+      }
+    }
+
+    @media only screen and (min-width:75em) {
+      .container {
+        max-width: 1170px;
+        margin: 0 auto
+      }
+    }
+
+    .header {
+      background-color: #fff;
+      color: #343851;
+      position: absolute;
+      z-index: 4;
+      width: 100%;
+      top: 0;
+      left: 0;
+      will-change: transform;
+      -webkit-transform: translateY(0);
+      transform: translateY(0)
+    }
+
+    .header a {
+      display: -webkit-box;
+      display: -ms-flexbox;
+      display: flex;
+      -webkit-box-align: center;
+      -ms-flex-align: center;
+      align-items: center;
+      border-bottom: 0
+    }
+
+    .header__logo {
+      display: -webkit-box;
+      display: -ms-flexbox;
+      display: flex;
+      height: 100%;
+      overflow: hidden;
+      padding: 19px 0;
+      margin-right: 1.25rem;
+      outline: 0;
+      border-bottom: 0;
+      color: #313237
+    }
+
+    .header__logo .header__logo--container {
+      width: 58px
+    }
+
+    .header__logo .header__logo--container .logo {
+      fill: currentColor
+    }
+
+    .header__inner {
+      display: -webkit-box;
+      display: -ms-flexbox;
+      display: flex;
+      -webkit-box-align: center;
+      -ms-flex-align: center;
+      align-items: center;
+      height: 3.75em;
+      -webkit-box-pack: justify;
+      -ms-flex-pack: justify;
+      justify-content: space-between
+    }
+
+    .header__links {
+      padding-bottom: .5rem;
+      display: none;
+      position: absolute;
+      top: 3.75em;
+      left: 0;
+      width: 100%;
+      height: auto;
+      background: #fff
+    }
+
+    .header__link {
+      color: #343851;
+      padding: .938rem 0;
+      border-top: 1px solid #ededed
+    }
+
+    .header__toggle {
+      display: -webkit-box;
+      display: -ms-flexbox;
+      display: flex;
+      -webkit-box-orient: vertical;
+      -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+      flex-direction: column;
+      -webkit-box-pack: center;
+      -ms-flex-pack: center;
+      justify-content: center;
+      width: 44px;
+      height: 100%;
+      background-color: transparent;
+      padding-left: 1.25rem
+    }
+
+    .header__toggle span {
+      display: block;
+      position: relative;
+      margin-top: 4px;
+      background-color: #343851;
+      width: 100%;
+      height: 2px;
+      border-radius: 1px
+    }
+
+    .header__toggle span:first-child {
+      margin-top: 0
+    }
+
+    @media (min-width:62em) {
+      .header__toggle {
+        display: none;
+        visibility: hidden
+      }
+
+      .header__links {
+        position: static;
+        padding: 0;
+        display: -webkit-box;
+        display: -ms-flexbox;
+        display: flex;
+        -webkit-box-orient: vertical;
+        -webkit-box-direction: normal;
+        -ms-flex-direction: column;
+        flex-direction: column;
+        visibility: visible;
+        width: auto;
+        height: 100%
+      }
+
+      .header__links-wrapper {
+        display: -webkit-box;
+        display: -ms-flexbox;
+        display: flex;
+        height: 100%;
+        padding: 0
+      }
+
+      .header__link {
+        position: relative;
+        padding: .938rem 1rem;
+        border: 0;
+        height: 100%
+      }
+
+      .header__link::after {
+        content: "";
+        display: block;
+        position: absolute;
+        left: 0;
+        bottom: 0;
+        height: 3px;
+        width: 100%;
+        -webkit-transform: scaleX(0);
+        transform: scaleX(0);
+        background: #277cea
+      }
+    }
+
+    .post-card {
+      display: block;
+      position: relative;
+      width: 100%;
+      min-height: 250px;
+      border-radius: 4px;
+      overflow: hidden;
+      background-color: #fff;
+      -webkit-box-shadow: 0 1px 3px rgba(0, 0, 0, .08);
+      box-shadow: 0 1px 3px rgba(0, 0, 0, .08);
+      margin-bottom: 2.25rem;
+      border-bottom: 0
+    }
+
+    @media only screen and (min-width:48em) {
+      .post-card {
+        width: 48.4375%;
+        margin-right: 3.125%
+      }
+
+      .post-card:nth-child(2n+2) {
+        margin-right: 0
+      }
+    }
+
+    @media only screen and (min-width:75em) {
+      .post-card {
+        width: 31.25%;
+        margin-right: 3.125%
+      }
+
+      .post-card:nth-child(2n+2) {
+        margin-right: 3.125%
+      }
+    }
+
+    .post-card__label {
+      position: absolute;
+      top: 1.5rem;
+      left: 1.5rem;
+      z-index: 2
+    }
+
+    .post-card__inner {
+      display: block;
+      position: relative;
+      padding: 1.875rem 1.25rem .625rem;
+      width: 100%;
+      color: #838c8d;
+      border-bottom: 0
+    }
+
+    .post-card__header {
+      margin-bottom: .75rem
+    }
+
+    .post-card__meta {
+      font-size: .875rem
+    }
+
+    .post-card__thumb {
+      margin: 0;
+      background: #fff;
+      position: relative;
+      overflow: hidden
+    }
+
+    .post-card__thumb::after {
+      content: "";
+      display: block;
+      height: 0;
+      width: 100%;
+      padding-bottom: 56.25%
+    }
+
+    .post-card__thumb>* {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      display: block
+    }
+
+    .label {
+      padding: 0 10px;
+      margin-bottom: 1rem;
+      display: inline-block;
+      line-height: 20px;
+      font-size: .75rem;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      color: rgba(255, 255, 255, .8);
+      border: 2px solid rgba(255, 255, 255, .5);
+      border-radius: 100px
+    }
+
+    .hero {
+      margin: 3.75rem auto 0;
+      min-height: 16.25rem;
+      width: 100%;
+      position: relative;
+      background-color: #dde5ea;
+      background-repeat: no-repeat;
+      background-position: 50%;
+      background-size: cover
+    }
+
+    @media only screen and (min-width:62em) {
+      .hero {
+        margin: 0 auto;
+        height: 36em
+      }
+    }
+
+    .hero::before {
+      position: absolute;
+      display: block;
+      content: "";
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: rgba(52, 56, 81, .8)
+    }
+
+    .hero__wrap {
+      position: absolute;
+      margin: auto;
+      top: 50%;
+      left: 50%;
+      -webkit-transform: translate(-50%, -50%);
+      transform: translate(-50%, -50%);
+      text-align: center;
+      color: rgba(255, 255, 255, .8);
+      width: 100%;
+      max-width: 90%;
+      z-index: 1
+    }
+
+    .hero__wrap .hero__title {
+      font-size: 1.8em;
+      color: #fff
+    }
+
+    .blog {
+      background-color: #f9f9f9
+    }
+
+    .post-list {
+      padding-top: 2.5em;
+      display: -webkit-box;
+      display: -ms-flexbox;
+      display: flex;
+      -ms-flex-wrap: wrap;
+      flex-wrap: wrap;
+      -webkit-box-flex: 1;
+      -ms-flex: 1 0 auto;
+      flex: 1 0 auto
+    }
+
+    @media only screen and (min-width:48em) {
+      .hero__wrap {
+        max-width: 40em
+      }
+
+      .hero__wrap .hero__title {
+        padding: 1rem 0;
+        font-size: 2.625em;
+        line-height: 3.125rem
+      }
+
+      .post-list {
+        padding-top: 5em
+      }
+    }
+  </style>
+  <link rel="preload" href="/static/css/main.css" as="style" onload="this.rel='stylesheet'"> <noscript>
+    <link rel="stylesheet" href="/static/css/main.css"></noscript>
+  <script type="text/javascript">
+    /*! loadCSS. [c]2017 Filament Group, Inc. MIT License */
+    (function(w) {
+      "use strict";
+      if (!w.loadCSS) {
+        w.loadCSS = function() {}
+      }
+      var rp = loadCSS.relpreload = {};
+      rp.support = (function() {
+        var ret;
+        try {
+          ret = w.document.createElement("link").relList.supports("preload")
+        } catch (e) {
+          ret = !1
+        }
+        return function() {
+          return ret
+        }
+      })();
+      rp.bindMediaToggle = function(link) {
+        var finalMedia = link.media || "all";
+
+        function enableStylesheet() {
+          link.media = finalMedia
+        }
+        if (link.addEventListener) {
+          link.addEventListener("load", enableStylesheet)
+        } else if (link.attachEvent) {
+          link.attachEvent("onload", enableStylesheet)
+        }
+        setTimeout(function() {
+          link.rel = "stylesheet";
+          link.media = "only x"
+        });
+        setTimeout(enableStylesheet, 3000)
+      };
+      rp.poly = function() {
+        if (rp.support()) {
+          return
+        }
+        var links = w.document.getElementsByTagName("link");
+        for (var i = 0; i < links.length; i++) {
+          var link = links[i];
+          if (link.rel === "preload" && link.getAttribute("as") === "style" && !link.getAttribute("data-loadcss")) {
+            link.setAttribute("data-loadcss", !0);
+            rp.bindMediaToggle(link)
+          }
+        }
+      };
+      if (!rp.support()) {
+        rp.poly();
+        var run = w.setInterval(rp.poly, 500);
+        if (w.addEventListener) {
+          w.addEventListener("load", function() {
+            rp.poly();
+            w.clearInterval(run)
+          })
+        } else if (w.attachEvent) {
+          w.attachEvent("onload", function() {
+            rp.poly();
+            w.clearInterval(run)
+          })
+        }
+      }
+      if (typeof exports !== "undefined") {
+        exports.loadCSS = loadCSS
+      } else {
+        w.loadCSS = loadCSS
+      }
+    }(typeof global !== "undefined" ? global : this))
+  </script>
+</head>
+
+<body class="site">
+  <header class="header" itemscope itemtype="http://schema.org/SiteNavigationElement" aria-label="Main navigation">
+    <div class="container">
+      <div class="header__inner"> <a class="header__logo" href="/">
+          <div class="header__logo--container"> <svg class="logo" viewBox="0 0 90 36" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" preserveAspectRatio="none">
+              <g transform="translate(0.000000,46.000000) scale(0.100000,-0.100000)" fill="#000000" stroke="none">
+                <path
+                  d="M100 332 c0 -5 21 -9 48 -8 62 1 142 -29 142 -54 0 -13 -16 -24 -55 -39 -77 -29 -78 -29 -72 29 3 28 2 50 -2 50 -5 0 -11 -23 -14 -52 -4 -28 -12 -55 -19 -60 -10 -6 -10 -8 0 -8 6 0 12 -9 12 -19 0 -11 3 -26 6 -35 11 -29 20 -17 16 22 l-4 38 55 17 c31 10 66 26 79 37 l23 20 -28 25 c-15 13 -44 29 -65 34 -45 13 -122 14 -122 3z" />
+                <path
+                  d="M417 333 c-3 -5 20 -9 51 -9 63 0 137 -29 137 -54 0 -16 -51 -43 -102 -54 l-32 -7 6 52 c5 38 3 50 -5 45 -7 -4 -12 -26 -12 -50 0 -23 -5 -47 -12 -54 -9 -9 -9 -12 0 -12 7 0 12 -13 12 -29 0 -17 4 -32 9 -35 5 -4 7 11 4 33 -5 37 -4 39 28 46 18 4 53 16 77 26 55 24 55 53 0 82 -41 21 -152 35 -161 20z" />
+                <path d="M777 333 c-10 -9 -9 -191 1 -196 4 -3 8 42 9 99 1 57 0 104 -1 104 -2 0 -6 -3 -9 -7z" />
+                <path d="M350 145 c0 -9 5 -15 11 -13 6 2 11 8 11 13 0 5 -5 11 -11 13 -6 2 -11 -4 -11 -13z" />
+                <path d="M666 153 c-11 -11 -6 -23 9 -23 8 0 15 4 15 9 0 13 -16 22 -24 14z" />
+                <path d="M867 154 c-8 -8 1 -24 14 -24 5 0 9 7 9 15 0 15 -12 20 -23 9z" />
+              </g>
+            </svg></div>
+        </a>
+       
+       
+  </header>
+ 
+  <main class="site__content">
+    <div class="container">
+      <article class="post-content" itemprop="articleBody">
+        <h1> Blood transfusion </h1>
+        <p>Enter the required numerical inputs to get a ML Random Forest Classification prediction</p>
+        <ul>
+          <li> Recency - months since last donation</li>
+          <li> Frequency - total number of donation</li>
+          <li> Monetary - total blood donated in c.c.</li>
+          <li> Time - months since first donation</li>
+        </ul>
+        <p>The target attribute is a binary variable representing whether a person with the parameter entered would donate blood or not (1 stands for donating blood; 0 stands for not donating blood).</p>
+        <form action="{{ url_for('predict') }}" method="post">
+          <input type="text" name="experience" placeholder="Recency" required="required" />
+          <input type="text" name="test_score" placeholder="Frequency" required="required" />
+          <input type="text" name="interview_score" placeholder="Monetary" required="required" />
+          <input type="text" name="interview" placeholder="Time" required="required" />
+          <button type="submit" class="btn btn-primary btn-block btn-large">
+            Predict
+          </button>
+        </form>
+        <br />
+        <br />
+        {{ prediction_text }}
+        <p></p>
+        
+
+  <script async src="/static/bundle.js"></script> <!-- -->
+</body>
+<script src="https://unpkg.com/vanilla-back-to-top@7.2.1/dist/vanilla-back-to-top.min.js"></script>
+<script>
+  addBackToTop({
+    diameter: 56,
+    backgroundColor: '#313237',
+    textColor: '#fff'
+  })
+</script>
+
+</html>
